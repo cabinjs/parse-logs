@@ -2649,7 +2649,7 @@ fast-levenshtein@~2.0.4:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
-fast-safe-stringify@^2.0.4:
+fast-safe-stringify@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.6.tgz#04b26106cc56681f51a044cfc0d76cf0008ac2c2"
   integrity sha512-q8BZ89jjc+mz08rSxROs8VsrBBcn1SIw1kq9NjolL509tkABRk9io01RAjSaEv1Xb2uFLt8VtRiZbGp5H8iDtg==
@@ -4939,6 +4939,13 @@ parse-entities@^1.0.2, parse-entities@^1.1.0:
     is-decimal "^1.0.0"
     is-hexadecimal "^1.0.0"
 
+parse-err@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/parse-err/-/parse-err-0.0.4.tgz#fcba90d0331bb6d9d0e29dc36774448ba1378504"
+  integrity sha512-+XBHs81boDVgMmS9aW4OSbQKnIxs6538hu/Dca7UMslT6EOoXH1MKZGASoJhxDIGPyNregzr9DIeY5Ns1vtz+A==
+  dependencies:
+    lodash "^4.17.11"
+
 parse-json@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-2.2.0.tgz#f480f40434ef80741f8469099f8dea18f55a4dc9"
@@ -4968,15 +4975,15 @@ parse-ms@^2.0.0:
   resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-2.0.0.tgz#7b3640295100caf3fa0100ccceb56635b62f9d62"
   integrity sha512-AddiXFSLLCqj+tCRJ9MrUtHZB4DWojO3tk0NVZ+g5MaMQHF2+p2ktqxuoXyPFLljz/aUK0Nfhd/uGWnhXVXEyA==
 
-parse-request@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/parse-request/-/parse-request-0.0.2.tgz#ceecab49c0e10f56daa64675718994ecf50dafa5"
-  integrity sha512-vEt4pPhYLh2UZ49HmpCUNbpDUX/2l1HJmutBo5sKvkIzOA88UlS7Ef6TQU21r2zD5f5WXtyrH4w0IybAKFNXmA==
+parse-request@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/parse-request/-/parse-request-0.0.4.tgz#adc7ec28dafe3ac8a52e8525d4d5765c59ead547"
+  integrity sha512-Ji/z54jsy95Km+qKtYo6dVGRdbGzRusEbIRFQIy1wrlfMpMf1qDFhwSbrjPszF9kfyEqUcbcKc6WC7o85wRJHg==
   dependencies:
     cookie "^0.3.1"
-    fast-safe-stringify "^2.0.4"
-    lodash "^4.17.10"
-    url-parse "^1.4.1"
+    fast-safe-stringify "^2.0.6"
+    lodash "^4.17.11"
+    url-parse "^1.4.4"
 
 pascalcase@^0.1.1:
   version "0.1.1"
@@ -5461,7 +5468,7 @@ remark-heading-gap@^3.0.0:
   resolved "https://registry.yarnpkg.com/remark-heading-gap/-/remark-heading-gap-3.1.0.tgz#6a1851b4226fa82441ae1365bbd599d34b12d812"
   integrity sha512-KxH9CTgfDnVTZVMMLJRw73zxZSWGX+p6x/trG7ed2UsEYqMRr8Dqtu/SXp2vD1ZZhPM8CpS7SjS+qjmiaRFotw==
 
-"remark-license@github:niftylettuce/remark-license":
+remark-license@niftylettuce/remark-license:
   version "4.0.1"
   resolved "https://codeload.github.com/niftylettuce/remark-license/tar.gz/17ecb8f64f8f6082414d14f9267a12764e6ddbfb"
   dependencies:
@@ -7283,7 +7290,7 @@ url-parse-lax@^1.0.0:
   dependencies:
     prepend-http "^1.0.1"
 
-url-parse@^1.4.1:
+url-parse@^1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.4.tgz#cac1556e95faa0303691fec5cf9d5a1bc34648f8"
   integrity sha512-/92DTTorg4JjktLNLe6GPS2/RvAd/RGr6LuktmWSMLEOa6rjnlrFXNgSbSmkNvCoL2T028A0a1JaJLzRMlFoHg==

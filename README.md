@@ -67,7 +67,9 @@ The `user` object will also have a `ip_address` property added, but only if one 
 
 ```js
 const parseLogs = require('parse-logs');
+const bodyParser = require('koa-bodyparser');
 
+app.use(bodyParser());
 app.use((ctx, next) => {
   const log = parseLogs(ctx.request);
   console.log(log);
@@ -79,7 +81,10 @@ app.use((ctx, next) => {
 
 ```js
 const parseLogs = require('parse-logs');
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use((req, res, next) => {
   const log = parseLogs(req);
   console.log(log);
