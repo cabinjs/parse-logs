@@ -8,18 +8,18 @@ const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 // req = req (Express)
 const parseLogs = (req, userFields) => {
   // ensure that `req` is an object
-  if (!_.isPlainObject(req))
+  if (!_.isObject(req))
     throw new Error('Request object was missing or not an object');
 
   // ensure that a 'body' exists in the request
-  if (!_.isPlainObject(req.body))
+  if (!_.isObject(req.body))
     throw new Error('Log request is missing parsed `body` object property');
 
   // parse the request body for `message` and `meta` object
   const log = {};
   if (_.isString(req.body.message) && !isWhitespace(req.body.message))
     log.message = _.clone(req.body.message);
-  if (_.isPlainObject(req.body.meta) && !_.isEmpty(req.body.meta))
+  if (_.isObject(req.body.meta) && !_.isEmpty(req.body.meta))
     log.meta = _.cloneDeep(req.body.meta);
 
   // ensure that we have something sent from the client otherwise throw error
@@ -29,7 +29,7 @@ const parseLogs = (req, userFields) => {
     );
 
   // if `log.meta` is not an object then make it one
-  if (!_.isPlainObject(log.meta)) log.meta = {};
+  if (!_.isObject(log.meta)) log.meta = {};
 
   // parse the request (will populate user and IP if they do not already exist)
   log.meta = _.defaultsDeep(log.meta, parseRequest(req, userFields));

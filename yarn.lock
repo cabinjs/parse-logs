@@ -1420,10 +1420,15 @@ camelcase@^5.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
   integrity sha512-faqwZqnWxbxn+F1d399ygeamQNy3lPp/H9H6rNrqYh4FSVCtcY+3cub1MxA8o9mDd55mM8Aghuu/kuyYA6VTsA==
 
-caniuse-lite@^1.0.30000925, caniuse-lite@^1.0.30000926:
+caniuse-lite@^1.0.30000925:
   version "1.0.30000926"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000926.tgz#4361a99d818ca6e521dbe89a732de62a194a789c"
   integrity sha512-diMkEvxfFw09SkbErCLmw/1Fx1ZZe9xfWm4aeA2PUffB48x1tfZeMsK5j4BW7zN7Y4PdqmPVVdG2eYjE5IRTag==
+
+caniuse-lite@^1.0.30000927:
+  version "1.0.30000927"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000927.tgz#114a9de4ff1e01f5790fe578ecd93421c7524665"
+  integrity sha512-ogq4NbUWf1uG/j66k0AmiO3GjqJAlQyF8n4w8a954cbCyFKmYGvRtgz6qkq2fWuduTXHibX7GyYL5Pg58Aks2g==
 
 capture-stack-trace@^1.0.0:
   version "1.0.1"
@@ -4939,10 +4944,10 @@ parse-entities@^1.0.2, parse-entities@^1.1.0:
     is-decimal "^1.0.0"
     is-hexadecimal "^1.0.0"
 
-parse-err@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/parse-err/-/parse-err-0.0.4.tgz#fcba90d0331bb6d9d0e29dc36774448ba1378504"
-  integrity sha512-+XBHs81boDVgMmS9aW4OSbQKnIxs6538hu/Dca7UMslT6EOoXH1MKZGASoJhxDIGPyNregzr9DIeY5Ns1vtz+A==
+parse-err@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/parse-err/-/parse-err-0.0.5.tgz#8bfb1db963174fae6249d0f62bc99752ca600e43"
+  integrity sha512-B9kVP1HIahmchw6s2V06Z4l+qjPnaRuAxCQbKTgoenEMfskNcjGR7Wx4MDYMRFVlCy/qAhzMEXy60zanKUK0Bg==
   dependencies:
     lodash "^4.17.11"
 
@@ -6358,7 +6363,7 @@ retext-sentence-spacing@^2.0.1:
     unist-util-is "^2.0.0"
     unist-util-visit "^1.1.0"
 
-rimraf@^2.2.8, rimraf@^2.5.2, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@~2.6.2:
+rimraf@^2.2.8, rimraf@^2.5.2, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@~2.6.2:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
   integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
