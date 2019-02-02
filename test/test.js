@@ -74,17 +74,39 @@ test('filters out only specific log level properties', t => {
 });
 
 test('populates user object', t => {
+  const log = parseLogs(
+    {
+      body: {
+        message: 'Hello',
+        meta: {
+          level: 'info'
+        }
+      },
+      ip: '127.0.0.1',
+      user: {
+        full_name: 'niftylettuce'
+      }
+    },
+    ['full_name', 'ip_address']
+  );
+  t.deepEqual(log.meta.user, {
+    full_name: 'niftylettuce',
+    ip_address: '127.0.0.1'
+  });
+});
+
+test('populates user object from meta', t => {
   const log = parseLogs({
     body: {
       message: 'Hello',
       meta: {
-        level: 'info'
+        level: 'info',
+        user: {
+          full_name: 'niftylettuce'
+        }
       }
     },
-    ip: '127.0.0.1',
-    user: {
-      full_name: 'niftylettuce'
-    }
+    ip: '127.0.0.1'
   });
   t.deepEqual(log.meta.user, {
     full_name: 'niftylettuce',

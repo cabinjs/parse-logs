@@ -38,7 +38,7 @@ yarn add parse-logs
 
 ## How does it work
 
-This package exports a function that accepts one argument `req` which is either `ctx.request` from [Koa][] or `req` from [Express][].
+This package exports a function that accepts two arguments `req` which is either `ctx.request` from [Koa][] or `req` from [Express][], and `userFields`, which is an Array of user fields to pick using [parse-request][]'s `userFields` option (by default it is simply `[ "ip_address" ]`).
 
 You use this function to parse an inbound HTTP request body in order to return and validate a log object.
 
@@ -118,3 +118,5 @@ app.use((req, res, next) => {
 [koa]: https://koajs.com
 
 [express]: https://expressjs.com
+
+[parse-request]: https://github.com/cabinjs/parse-request
