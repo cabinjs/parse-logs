@@ -39,7 +39,7 @@ const parseLogs = (req, userFields = ['ip_address']) => {
   if (!isObject(log.meta)) log.meta = {};
 
   // parse the request (will populate user and IP if they do not already exist)
-  log.meta = defaultsDeep(log.meta, parseRequest(req, userFields));
+  log.meta = defaultsDeep(log.meta, parseRequest({ req, userFields }));
 
   // parse the app info
   if (isObject(log.meta.app))
@@ -66,8 +66,7 @@ const parseLogs = (req, userFields = ['ip_address']) => {
       }" was invalid, it must be one of: ${levels.join(', ')}`
     );
 
-  // if there was a `log.meta.user` property
-  console.log('log', log);
+  // TODO: if there was a `log.meta.user` property
 
   // return the log
   return log;
