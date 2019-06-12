@@ -1,6 +1,4 @@
 const isObject = require('lodash/isObject');
-const cloneDeep = require('lodash/cloneDeep');
-const clone = require('lodash/clone');
 const isEmpty = require('lodash/isEmpty');
 const pick = require('lodash/pick');
 const defaultsDeep = require('lodash/defaultsDeep');
@@ -8,6 +6,9 @@ const isString = require('lodash/isString');
 const includes = require('lodash/includes');
 const parseRequest = require('parse-request');
 const isWhitespace = require('is-whitespace');
+const rfdc = require('rfdc');
+
+const clone = rfdc();
 
 const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 
@@ -27,7 +28,7 @@ const parseLogs = (req, userFields = ['ip_address']) => {
   if (isString(req.body.message) && !isWhitespace(req.body.message))
     log.message = clone(req.body.message);
   if (isObject(req.body.meta) && !isEmpty(req.body.meta))
-    log.meta = cloneDeep(req.body.meta);
+    log.meta = clone(req.body.meta);
 
   // ensure that we have something sent from the client otherwise throw error
   if (isEmpty(log))

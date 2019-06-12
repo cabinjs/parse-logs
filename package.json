@@ -5,7 +5,10 @@
   "author": "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)",
   "ava": {
     "failFast": true,
-    "verbose": true
+    "verbose": true,
+    "helpers": [
+      "test/helpers/**/*"
+    ]
   },
   "bugs": {
     "url": "https://github.com/cabinjs/parse-logs/issues",
@@ -22,26 +25,26 @@
   "dependencies": {
     "is-whitespace": "^0.3.0",
     "lodash": "^4.17.11",
-    "parse-request": "^1.0.0",
-    "underscore.string": "^3.3.5"
+    "parse-request": "^1.0.3",
+    "rfdc": "^1.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@commitlint/cli": "^7.5.2",
-    "@commitlint/config-conventional": "^7.5.0",
-    "ava": "^1.4.1",
-    "codecov": "^3.3.0",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "ava": "^2.1.0",
+    "codecov": "^3.5.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-xo-lass": "^1.0.3",
-    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-node": "^9.1.0",
     "fixpack": "^2.3.1",
-    "husky": "^2.1.0",
-    "lint-staged": "^8.1.5",
-    "nyc": "^14.0.0",
-    "parse-err": "^0.0.7",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.0",
+    "nyc": "^14.1.1",
+    "parse-err": "^0.0.9",
     "remark-cli": "^6.0.1",
     "remark-preset-github": "^0.0.13",
     "rimraf": "^2.6.3",
