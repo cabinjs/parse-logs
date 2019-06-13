@@ -69,7 +69,7 @@ test('filters out only specific log level properties', t => {
   t.true(_.isPlainObject(log.meta));
   t.deepEqual(
     Object.keys(log.meta).sort(),
-    ['request', 'user', 'level', 'err'].sort()
+    ['timestamp', 'id', 'duration', 'request', 'user', 'level', 'err'].sort()
   );
 });
 
