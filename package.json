@@ -1,7 +1,7 @@
 {
   "name": "parse-logs",
   "description": "Parse and validate logs to adhere to the message and meta standards from Lad and Cabin",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "author": "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)",
   "ava": {
     "failFast": true,
