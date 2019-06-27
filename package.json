@@ -25,7 +25,7 @@
   "dependencies": {
     "is-whitespace": "^0.3.0",
     "lodash": "^4.17.11",
-    "parse-request": "^1.0.12",
+    "parse-request": "^2.0.0",
     "rfdc": "^1.1.4"
   },
   "devDependencies": {
@@ -41,10 +41,10 @@
     "eslint-config-xo-lass": "^1.0.3",
     "eslint-plugin-node": "^9.1.0",
     "fixpack": "^2.3.1",
-    "husky": "^2.4.1",
+    "husky": "^2.7.0",
     "lint-staged": "^8.2.1",
     "nyc": "^14.1.1",
-    "parse-err": "^0.0.9",
+    "parse-err": "^0.0.10",
     "remark-cli": "^6.0.1",
     "remark-preset-github": "^0.0.14",
     "rimraf": "^2.6.3",
