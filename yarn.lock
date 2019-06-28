@@ -5475,10 +5475,10 @@ parse-ms@^2.1.0:
   resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-2.1.0.tgz#348565a753d4391fa524029956b172cb7753097d"
   integrity sha512-kHt7kzLoS9VBZfUsiKjv43mr91ea+U05EyKkEtqp7vNbHxmaVuEqN7XxeEVnGrMtYOAxGrDElSi96K7EgO1zCA==
 
-parse-request@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/parse-request/-/parse-request-2.0.0.tgz#e8a1d5019550af1a6d4f0c1f947cc56cfcbaf46b"
-  integrity sha512-qXAsfM3bRmiV269pKB4YwPJ3LFBIVvh6hE7aANzs7PcjAWPa0icfVUQ+2XWMKYS0jvqkM2otFMhIXvOPk06Drg==
+parse-request@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/parse-request/-/parse-request-2.0.1.tgz#1fbf5b7b188eda6f1c88c3d5dea413ccca84896d"
+  integrity sha512-qc5m9aBNSyDy8n6+sxET9rtFI83RlUWMmf1h/BCLxXeLkzQdau6RE8kY3vb07QRDln/WsxVShXR3iRE19a4Y5Q==
   dependencies:
     browser-process-hrtime "^1.0.0"
     bson-objectid "^1.3.0"
@@ -5494,7 +5494,7 @@ parse-request@^2.0.0:
     ms "^2.1.2"
     no-case "^2.3.2"
     rfdc "^1.1.4"
-    sensitive-fields "^0.0.2"
+    sensitive-fields "^0.0.5"
     url-parse "^1.4.7"
 
 pascalcase@^0.1.1:
@@ -6972,13 +6972,10 @@ semver@^6.0.0, semver@^6.1.0, semver@^6.1.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.1.2.tgz#079960381376a3db62eb2edc8a3bfb10c7cfe318"
   integrity sha512-z4PqiCpomGtWj8633oeAdXm1Kn1W++3T8epkZYnwiVgIYIJ0QHszhInYSJTYxebByQH7KVCEAn8R9duzZW2PhQ==
 
-sensitive-fields@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/sensitive-fields/-/sensitive-fields-0.0.2.tgz#16cd07ede4decc25429dc2a9e9365f1649d9e862"
-  integrity sha512-zy2H04jIKu84sty0dD8+5GxM3xszX4VrciQ1o/wdS4f1nPFVLdA/UDZceefM7y3f5yvusRbwoCBI2MiGG9aOwQ==
-  dependencies:
-    lodash "^4.17.11"
-    underscore.string "^3.3.5"
+sensitive-fields@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/sensitive-fields/-/sensitive-fields-0.0.5.tgz#9ac4c2b546f986064e0b2218fabfd615afaf8f4b"
+  integrity sha512-CT1EJZnA+eXUZIvPIaX20WN21BqkGngLIj8cxtpO9gYWR0Revo0sDrzjdb5Tepm6hpmpNS8O8DVJQkgdql3nag==
 
 serialize-error@^2.1.0:
   version "2.1.0"
@@ -7192,11 +7189,6 @@ split2@^2.0.0:
   integrity sha512-RAb22TG39LhI31MbreBgIuKiIKhVsawfTgEGqKHTK87aG+ul/PB8Sqoi3I7kVdRWiCfrKxK3uo4/YUkpNvhPbw==
   dependencies:
     through2 "^2.0.2"
-
-sprintf-js@^1.0.3:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
-  integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -7615,14 +7607,6 @@ uid2@0.0.3:
   resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.3.tgz#483126e11774df2f71b8b639dcd799c376162b82"
   integrity sha1-SDEm4Rd03y9xuLY53NeZw3YWK4I=
 
-underscore.string@^3.3.5:
-  version "3.3.5"
-  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.3.5.tgz#fc2ad255b8bd309e239cbc5816fd23a9b7ea4023"
-  integrity sha512-g+dpmgn+XBneLmXXo+sGlW5xQEt4ErkS3mgeN2GFbremYeMBSJKr9Wf2KJplQVaiPY/f7FN6atosWYNm9ovrYg==
-  dependencies:
-    sprintf-js "^1.0.3"
-    util-deprecate "^1.0.2"
-
 unherit@^1.0.4:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/unherit/-/unherit-1.1.2.tgz#14f1f397253ee4ec95cec167762e77df83678449"
@@ -7938,7 +7922,7 @@ use@^3.1.0:
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
-util-deprecate@^1.0.2, util-deprecate@~1.0.1:
+util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
