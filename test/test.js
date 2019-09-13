@@ -54,6 +54,22 @@ test('throws error with invalid log level', t => {
   t.regex(error.message, /Log `level` of "infoo" was invalid/);
 });
 
+test('parses error to Error object', t => {
+  const log = parseLogs({
+    body: {
+      message: 'Hello',
+      meta: {
+        level: 'error',
+        err: {
+          message: 'Uh oh'
+        }
+      }
+    }
+  });
+  t.deepEqual(Object.keys(log), ['message', 'meta']);
+  t.pass();
+});
+
 test('filters out only specific log level properties', t => {
   const log = parseLogs({
     body: {

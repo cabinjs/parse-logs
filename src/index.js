@@ -1,12 +1,51 @@
-const isObject = require('lodash/isObject');
-const isEmpty = require('lodash/isEmpty');
-const pick = require('lodash/pick');
+const ErrorStackParser = require('error-stack-parser');
+const StackFrame = require('stackframe');
 const defaultsDeep = require('lodash/defaultsDeep');
-const isString = require('lodash/isString');
 const includes = require('lodash/includes');
-const parseRequest = require('parse-request');
+const isEmpty = require('lodash/isEmpty');
+const isError = require('iserror');
+const isObject = require('lodash/isObject');
+const isString = require('lodash/isString');
 const isWhitespace = require('is-whitespace');
+const parseRequest = require('parse-request');
+const pick = require('lodash/pick');
+const prepareStackTrace = require('prepare-stack-trace');
 const rfdc = require('rfdc');
+
+//
+// The following override is required until this PR is merged
+// <https://github.com/stacktracejs/stackframe/pull/23>
+//
+StackFrame.prototype.toString = function() {
+  const fileName = this.getFileName() || '';
+  const lineNumber = this.getLineNumber() || '';
+  const columnNumber = this.getColumnNumber() || '';
+  const functionName = this.getFunctionName() || '';
+  if (this.getIsEval()) {
+    if (fileName) {
+      return (
+        '[eval] (' + fileName + ':' + lineNumber + ':' + columnNumber + ')'
+      );
+    }
+
+    return '[eval]:' + lineNumber + ':' + columnNumber;
+  }
+
+  if (functionName) {
+    return (
+      functionName +
+      ' (' +
+      fileName +
+      ':' +
+      lineNumber +
+      ':' +
+      columnNumber +
+      ')'
+    );
+  }
+
+  return fileName + ':' + lineNumber + ':' + columnNumber;
+};
 
 const clone = rfdc();
 
@@ -14,6 +53,7 @@ const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 
 // req = ctx.request (Koa)
 // req = req (Express)
+// eslint-disable-next-line complexity
 const parseLogs = (req, userFields = ['ip_address']) => {
   // ensure that `req` is an object
   if (!isObject(req))
@@ -68,6 +108,40 @@ const parseLogs = (req, userFields = ['ip_address']) => {
     );
 
   // TODO: if there was a `log.meta.user` property
+
+  // parse the error if it has one
+  if (
+    isObject(log.meta) &&
+    isObject(log.meta.err) &&
+    isString(log.meta.err.message) &&
+    !isError(log.meta.err)
+  ) {
+    try {
+      const err = new Error(log.meta.err.message);
+      const { stack } = err;
+      for (const prop in log.meta.err) {
+        if (Object.prototype.hasOwnProperty.call(log.meta.err, prop))
+          err[prop] = log.meta.err[prop];
+      }
+
+      if (!err.name && err.constructor.name) err.name = err.constructor.name;
+      // <https://github.com/tjmehta/error-to-json/blob/master/index.js#L46-L55>
+      if (err.stack === stack) err.stack = stack.slice(0, stack.indexOf('\n'));
+      //
+      // Note we could use `stackTrace.parse(err)`
+      // however we shouldn't assume that everyone
+      // will be sending us Node-like stack traces
+      // (e.g. ones converted using StackTrace.JS `fromError`)
+      //
+      // const stackTrace = require('stack-trace');
+      //
+      err.stack = prepareStackTrace(err, ErrorStackParser.parse(err));
+      log.meta.err = err;
+    } catch (err) {
+      log.meta.original_err = log.meta.err;
+      log.meta.err = err;
+    }
+  }
 
   // return the log
   return log;
