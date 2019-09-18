@@ -1,5 +1,4 @@
 const ErrorStackParser = require('error-stack-parser');
-const StackFrame = require('stackframe');
 const defaultsDeep = require('lodash/defaultsDeep');
 const includes = require('lodash/includes');
 const isEmpty = require('lodash/isEmpty');
@@ -11,41 +10,6 @@ const parseRequest = require('parse-request');
 const pick = require('lodash/pick');
 const prepareStackTrace = require('prepare-stack-trace');
 const rfdc = require('rfdc');
-
-//
-// The following override is required until this PR is merged
-// <https://github.com/stacktracejs/stackframe/pull/23>
-//
-StackFrame.prototype.toString = function() {
-  const fileName = this.getFileName() || '';
-  const lineNumber = this.getLineNumber() || '';
-  const columnNumber = this.getColumnNumber() || '';
-  const functionName = this.getFunctionName() || '';
-  if (this.getIsEval()) {
-    if (fileName) {
-      return (
-        '[eval] (' + fileName + ':' + lineNumber + ':' + columnNumber + ')'
-      );
-    }
-
-    return '[eval]:' + lineNumber + ':' + columnNumber;
-  }
-
-  if (functionName) {
-    return (
-      functionName +
-      ' (' +
-      fileName +
-      ':' +
-      lineNumber +
-      ':' +
-      columnNumber +
-      ')'
-    );
-  }
-
-  return fileName + ':' + lineNumber + ':' + columnNumber;
-};
 
 const clone = rfdc();
 
