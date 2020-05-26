@@ -18,24 +18,28 @@ const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 // req = ctx.request (Koa)
 // req = req (Express)
 // eslint-disable-next-line complexity
-const parseLogs = (req, userFields = ['ip_address']) => {
+const parseLogs = (req, userFields = ['ip_address'], allowEmpty = false) => {
   // ensure that `req` is an object
   if (!isObject(req))
     throw new Error('Request object was missing or not an object');
 
+  const isBodyAnObject = isObject(req.body);
+
   // ensure that a 'body' exists in the request
-  if (!isObject(req.body))
+  if (!allowEmpty && !isBodyAnObject)
     throw new Error('Log request is missing parsed `body` object property');
 
   // parse the request body for `message` and `meta` object
   const log = {};
-  if (isString(req.body.message) && !isWhitespace(req.body.message))
-    log.message = clone(req.body.message);
-  if (isObject(req.body.meta) && !isEmpty(req.body.meta))
-    log.meta = clone(req.body.meta);
+  if (isBodyAnObject) {
+    if (isString(req.body.message) && !isWhitespace(req.body.message))
+      log.message = clone(req.body.message);
+    if (isObject(req.body.meta) && !isEmpty(req.body.meta))
+      log.meta = clone(req.body.meta);
+  }
 
   // ensure that we have something sent from the client otherwise throw error
-  if (isEmpty(log))
+  if (!allowEmpty && isEmpty(log))
     throw new Error(
       'Log is missing `message` and/or `meta` properties (at least one is required)'
     );
@@ -60,11 +64,11 @@ const parseLogs = (req, userFields = ['ip_address']) => {
     ]);
 
   // ensure log level is a String if it was passed in request
-  if (!isString(log.meta.level))
+  if (!allowEmpty && !isString(log.meta.level))
     throw new Error('Log meta `level` must be a String');
 
   // ensure it is a valid log level
-  if (!includes(levels, log.meta.level))
+  if (!allowEmpty && !includes(levels, log.meta.level))
     throw new Error(
       `Log \`level\` of "${
         log.meta.level

@@ -169,3 +169,11 @@ test('filters out specific userFields if the argument was passed', t => {
     ip_address: '127.0.0.1'
   });
 });
+
+test('does not allow an empty log', t => {
+  t.throws(() => parseLogs({}));
+});
+
+test('allows an empty log', t => {
+  t.notThrows(() => parseLogs({}, null, true));
+});
