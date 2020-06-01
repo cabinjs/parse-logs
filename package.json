@@ -6,8 +6,11 @@
   "ava": {
     "failFast": true,
     "verbose": true,
-    "helpers": [
-      "test/helpers/**/*"
+    "files": [
+      "test/*.js",
+      "test/**/*.js",
+      "!test/helpers/*.js",
+      "!test/helpers/**/*.js"
     ]
   },
   "bugs": {
@@ -23,35 +26,35 @@
     "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)"
   ],
   "dependencies": {
-    "error-stack-parser": "^2.0.4",
+    "error-stack-parser": "^2.0.6",
     "is-whitespace": "^0.3.0",
     "iserror": "^0.0.2",
     "lodash": "^4.17.15",
-    "parse-request": "^2.0.6",
+    "parse-request": "^2.0.8",
     "prepare-stack-trace": "^0.0.4",
     "rfdc": "^1.1.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
-    "ava": "^2.4.0",
-    "codecov": "^3.6.1",
-    "cross-env": "^6.0.3",
-    "eslint": "^6.7.2",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "ava": "^3.8.2",
+    "codecov": "^3.7.0",
+    "cross-env": "^7.0.2",
+    "eslint": "6.x",
     "eslint-config-xo-lass": "^1.0.3",
-    "eslint-plugin-node": "^10.0.0",
-    "fixpack": "^2.3.1",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
-    "nyc": "^14.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "fixpack": "^3.0.6",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.7",
+    "nyc": "^15.1.0",
     "parse-err": "^0.0.12",
-    "remark-cli": "^7.0.1",
-    "remark-preset-github": "^0.0.16",
-    "rimraf": "^3.0.0",
-    "xo": "^0.25.3"
+    "remark-cli": "^8.0.0",
+    "remark-preset-github": "^1.0.1",
+    "rimraf": "^3.0.2",
+    "xo": "0.25"
   },
   "engines": {
     "node": ">=6.4.0"
@@ -89,22 +92,6 @@
     "user"
   ],
   "license": "MIT",
-  "lint-staged": {
-    "linters": {
-      "*.js": [
-        "xo --fix",
-        "git add"
-      ],
-      "*.md": [
-        "remark . -qfo",
-        "git add"
-      ],
-      "package.json": [
-        "fixpack",
-        "git add"
-      ]
-    }
-  },
   "main": "lib/index.js",
   "prettier": {
     "singleQuote": true,
