@@ -30,7 +30,7 @@
     "is-whitespace": "^0.3.0",
     "iserror": "^0.0.2",
     "lodash": "^4.17.15",
-    "parse-request": "^2.0.8",
+    "parse-request": "^3.0.0",
     "prepare-stack-trace": "^0.0.4",
     "rfdc": "^1.1.4"
   },
