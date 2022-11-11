@@ -1,7 +1,7 @@
 {
   "name": "parse-logs",
   "description": "Parse and validate logs to adhere to the message and meta standards from Lad and Cabin",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)",
   "bugs": {
     "url": "https://github.com/cabinjs/parse-logs/issues",
