@@ -15,6 +15,33 @@ const clone = rfdc();
 
 const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 
+function parseError(error) {
+  const err = new Error(error.message);
+  const { stack } = err;
+
+  for (const prop in error) {
+    if (Object.prototype.hasOwnProperty.call(error, prop))
+      err[prop] = error[prop];
+  }
+
+  if (!err.name && err.constructor.name) err.name = err.constructor.name;
+
+  // <https://github.com/tjmehta/error-to-json/blob/f8c293395c71d157ac96eb83657da9c47d7dadb2/src/index.ts#L55-L56>
+  if (err.stack === stack) err.stack = stack.slice(0, stack.indexOf('\n'));
+
+  //
+  // Note we could use `stackTrace.parse(err)`
+  // however we shouldn't assume that everyone
+  // will be sending us Node-like stack traces
+  // (e.g. ones converted using StackTrace.JS `fromError`)
+  //
+  // const stackTrace = require('stack-trace');
+  //
+  err.stack = prepareStackTrace(err, ErrorStackParser.parse(err));
+
+  return err;
+}
+
 // req = ctx.request (Koa)
 // req = req (Express)
 // eslint-disable-next-line complexity
@@ -29,9 +56,11 @@ const parseLogs = (req, userFields = ['ip_address'], allowEmpty = false) => {
   if (!allowEmpty && !isBodyAnObject)
     throw new Error('Log request is missing parsed `body` object property');
 
-  // parse the request body for `message` and `meta` object
+  // parse the request body for `err`, `message`, and `meta` object
   const log = {};
   if (isBodyAnObject) {
+    if (isObject(req.body.err) && !isEmpty(req.body.err))
+      log.err = clone(req.body.err);
     if (isString(req.body.message) && !isWhitespace(req.body.message))
       log.message = clone(req.body.message);
     if (isObject(req.body.meta) && !isEmpty(req.body.meta))
@@ -75,9 +104,31 @@ const parseLogs = (req, userFields = ['ip_address'], allowEmpty = false) => {
       }" was invalid, it must be one of: ${levels.join(', ')}`
     );
 
-  // TODO: if there was a `log.meta.user` property
+  // parse the error if it has one in `log.meta.original_err`
+  if (
+    isObject(log.meta) &&
+    isObject(log.meta.original_err) &&
+    isString(log.meta.original_err.message) &&
+    !isError(log.meta.original_err)
+  ) {
+    try {
+      log.meta.original_err = parseError(log.meta.original_err);
+    } catch (err) {
+      log.meta.err = err;
+    }
+  }
 
-  // parse the error if it has one
+  // parse the error if it has one in `log.err`
+  if (isObject(log.err) && isString(log.err.message) && !isError(log.err)) {
+    try {
+      log.err = parseError(log.err);
+    } catch (err) {
+      log.original_err = log.err;
+      log.err = err;
+    }
+  }
+
+  // parse the error if it has one in `log.meta.err`
   if (
     isObject(log.meta) &&
     isObject(log.meta.err) &&
@@ -85,26 +136,7 @@ const parseLogs = (req, userFields = ['ip_address'], allowEmpty = false) => {
     !isError(log.meta.err)
   ) {
     try {
-      const err = new Error(log.meta.err.message);
-      const { stack } = err;
-      for (const prop in log.meta.err) {
-        if (Object.prototype.hasOwnProperty.call(log.meta.err, prop))
-          err[prop] = log.meta.err[prop];
-      }
-
-      if (!err.name && err.constructor.name) err.name = err.constructor.name;
-      // <https://github.com/tjmehta/error-to-json/blob/master/index.js#L46-L55>
-      if (err.stack === stack) err.stack = stack.slice(0, stack.indexOf('\n'));
-      //
-      // Note we could use `stackTrace.parse(err)`
-      // however we shouldn't assume that everyone
-      // will be sending us Node-like stack traces
-      // (e.g. ones converted using StackTrace.JS `fromError`)
-      //
-      // const stackTrace = require('stack-trace');
-      //
-      err.stack = prepareStackTrace(err, ErrorStackParser.parse(err));
-      log.meta.err = err;
+      log.meta.err = parseError(log.meta.err);
     } catch (err) {
       log.meta.original_err = log.meta.err;
       log.meta.err = err;

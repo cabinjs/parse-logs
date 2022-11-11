@@ -4,17 +4,17 @@ const _ = require('lodash');
 
 const parseLogs = require('..');
 
-test('throws error if it was not passed an object', t => {
+test('throws error if it was not passed an object', (t) => {
   const error = t.throws(() => parseLogs());
   t.is(error.message, 'Request object was missing or not an object');
 });
 
-test('throws error if body does not exist', t => {
+test('throws error if body does not exist', (t) => {
   const error = t.throws(() => parseLogs({}));
   t.is(error.message, 'Log request is missing parsed `body` object property');
 });
 
-test('throws error with missing log message and/or meta', t => {
+test('throws error with missing log message and/or meta', (t) => {
   const error = t.throws(() =>
     parseLogs({
       body: {}
@@ -26,7 +26,7 @@ test('throws error with missing log message and/or meta', t => {
   );
 });
 
-test('throws error with missing String for log level', t => {
+test('throws error with missing String for log level', (t) => {
   const error = t.throws(() =>
     parseLogs({
       body: {
@@ -40,7 +40,7 @@ test('throws error with missing String for log level', t => {
   t.is(error.message, 'Log meta `level` must be a String');
 });
 
-test('throws error with invalid log level', t => {
+test('throws error with invalid log level', (t) => {
   const error = t.throws(() =>
     parseLogs({
       body: {
@@ -54,23 +54,32 @@ test('throws error with invalid log level', t => {
   t.regex(error.message, /Log `level` of "infoo" was invalid/);
 });
 
-test('parses error to Error object', t => {
+test('parses error to Error object', (t) => {
   const log = parseLogs({
     body: {
+      err: {
+        message: 'Oops'
+      },
       message: 'Hello',
       meta: {
         level: 'error',
         err: {
           message: 'Uh oh'
+        },
+        original_err: {
+          message: 'Oops'
         }
       }
     }
   });
-  t.deepEqual(Object.keys(log), ['message', 'meta']);
+  t.deepEqual(Object.keys(log), ['err', 'message', 'meta']);
+  t.true(log.err instanceof Error);
+  t.true(log.meta.err instanceof Error);
+  t.true(log.meta.original_err instanceof Error);
   t.pass();
 });
 
-test('filters out only specific log level properties', t => {
+test('filters out only specific log level properties', (t) => {
   const log = parseLogs({
     body: {
       message: 'Hello',
@@ -89,7 +98,7 @@ test('filters out only specific log level properties', t => {
   );
 });
 
-test('populates user object', t => {
+test('populates user object', (t) => {
   const log = parseLogs(
     {
       body: {
@@ -111,7 +120,7 @@ test('populates user object', t => {
   });
 });
 
-test('populates user object from meta', t => {
+test('populates user object from meta', (t) => {
   const log = parseLogs({
     body: {
       message: 'Hello',
@@ -130,7 +139,7 @@ test('populates user object from meta', t => {
   });
 });
 
-test('populates IP address based off `req.ip`', t => {
+test('populates IP address based off `req.ip`', (t) => {
   const log = parseLogs(
     {
       body: {
@@ -150,7 +159,7 @@ test('populates IP address based off `req.ip`', t => {
   });
 });
 
-test('filters out specific userFields if the argument was passed', t => {
+test('filters out specific userFields if the argument was passed', (t) => {
   const log = parseLogs(
     {
       body: {
@@ -170,10 +179,10 @@ test('filters out specific userFields if the argument was passed', t => {
   });
 });
 
-test('does not allow an empty log', t => {
+test('does not allow an empty log', (t) => {
   t.throws(() => parseLogs({}));
 });
 
-test('allows an empty log', t => {
+test('allows an empty log', (t) => {
   t.notThrows(() => parseLogs({}, null, true));
 });
