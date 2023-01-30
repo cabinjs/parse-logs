@@ -22,15 +22,15 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
-    "ava": "^5.1.0",
+    "ava": "^5.1.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.31.0",
+    "eslint": "^8.33.0",
     "eslint-config-xo-lass": "^2.0.1",
     "fixpack": "^4.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "nyc": "^15.1.0",
-    "parse-err": "^0.0.12",
+    "parse-err": "^1.0.0",
     "remark-cli": "^11.0.0",
     "remark-preset-github": "^4.0.4",
     "xo": "0.53"
